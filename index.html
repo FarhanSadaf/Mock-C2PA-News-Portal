@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CBC News</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/cbc-news.css">
+  <link rel="stylesheet" href="assets/css/cr-credentials.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <button class="icon-btn" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Menu</span>
+        </button>
+      </div>
+
+      <a class="cbc-logo" href="#">
+        <span class="cbc-rosette" aria-hidden="true"></span>
+        CBC
+      </a>
+
+      <div class="topbar-right">
+        <a class="icon-btn" href="#" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Search</span>
+        </a>
+        <a class="icon-btn" href="#" aria-label="Sign In">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4" stroke-width="2"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Sign In</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Section nav -->
+    <nav class="section-nav">
+      <div class="container section-inner">
+        <div class="news-badge">NEWS</div>
+        <div class="cats">
+          <a href="#">Top Stories</a>
+          <a href="#">Local</a>
+          <a href="#">Climate</a>
+          <a href="#">World</a>
+          <a href="#">Politics</a>
+          <a href="#">Business</a>
+          <a href="#" class="more">More <span aria-hidden="true">▾</span></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Article -->
+  <main class="article container" data-article-id="" id="articleRoot">
+    <div class="kicker" id="kicker">World</div>
+    <h1 class="title" id="title">Loading…</h1>
+
+    <div class="byline">
+      <span id="author">—</span> ·
+      <span>Posted: <time id="posted">—</time></span> ·
+      <span>Last Updated: <time id="updated">—</time></span>
+    </div>
+
+    <figure class="hero" id="heroWrap">
+        <img id="hero" alt="Article image" src="" />
+        <!-- CR badge -->
+        <button class="cr-badge" id="crBadge" aria-haspopup="dialog" aria-controls="crModal" title="Content credentials">
+            <img src="assets/cr-logo.svg" alt="CR">
+        </button>
+        <figcaption class="caption" id="caption">—</figcaption>
+    </figure>
+
+    <!-- Popup modal -->
+    <div class="cr-modal" id="crModal" role="dialog" aria-modal="true" aria-labelledby="crModalTitle" hidden>
+    <div class="cr-modal__backdrop" data-cr-close></div>
+    <div class="cr-modal__window" tabindex="-1">
+        <button class="cr-modal__close" type="button" aria-label="Close" data-cr-close>&times;</button>
+        <h3 class="cr-modal__title" id="crModalTitle">Content credentials</h3>
+        <div class="cr-modal__body">
+            <!-- C2PA viewer injected here -->
+        </div>
+    </div>
+    </div>
+
+    <article class="content" id="body">
+      <!-- paragraphs injected here -->
+    </article>
+  </main>
+  
+  <script src="assets/js/populate-contents.js" defer></script>
+  <script src="assets/js/cr-popup.js" defer></script>
+  <script type="module" src="assets/js/c2pa-viewer.js" defer></script>
+</body>
+</html>

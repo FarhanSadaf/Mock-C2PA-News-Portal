@@ -14,7 +14,7 @@
   };
 
   try {
-    const res = await fetch('article.json', { cache: 'no-store' });
+    const res = await fetch('articles.json', { cache: 'no-store' });
     const list = await res.json(); // expecting an array
 
     const requestedId = getArticleIdFromURL();

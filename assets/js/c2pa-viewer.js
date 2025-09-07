@@ -52,7 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const niceDate = (iso) => {
-    try { return new Date(iso).toISOString(); } catch { return iso || '—'; }
+    try {
+      const d = new Date(iso);
+      if (isNaN(d)) return iso || '—';
+      // e.g. "Jun 02, 2024 4:28 PM CST/CDT"
+      const formatted = d.toLocaleString('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+        // If you want to force Central time regardless of viewer location, add:
+        // timeZone: 'America/Chicago'
+      });
+      // remove the comma before the time: "Jun 02, 2024, 4:28 PM" -> "Jun 02, 2024 4:28 PM"
+      return formatted.replace(/,\s(?=\d{1,2}:)/, ' ');
+    } catch {
+      return iso || '—';
+    }
   };
 
   // pretty names for common action codes

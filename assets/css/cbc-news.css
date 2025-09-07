@@ -62,6 +62,54 @@ h1.title{margin:.25em 0 .35em;font-size:38px;line-height:1.15;letter-spacing:-.0
 .content{max-width:720px}
 .content p{margin:1em 0}
 
+.related-stories {
+  margin-top: 2.5rem;
+}
+
+.related-stories #relatedHeading {
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  font-size: 1.1rem;            
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111;
+  border-bottom: 1px solid #111;  
+  max-width: 85%;
+}
+
+.related-stories ul {
+  margin: 0;
+  padding-left: 1.25rem;     
+  list-style: disc;
+}
+
+.related-stories li {
+  margin: 0.75rem 0;          
+}
+
+.related-stories a {
+  color: #0b57d0;             
+  font-weight: 600;           
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.related-stories a:hover,
+.related-stories a:focus-visible {
+  text-decoration: underline;
+}
+
+.related-stories a:active {
+  opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+  .related-stories a {
+    font-size: 1.0625rem;     /* ~17px */
+  }
+}
+
 @media (max-width:760px){
   .news-badge{font-size:18px}
   h1.title{font-size:30px}

@@ -38,8 +38,10 @@ a{color:inherit;text-decoration:none}
 .cbc-rosette{width:22px;height:22px;border-radius:50%;background:var(--nav-bg);display:inline-block;box-shadow:0 0 0 5px rgba(228,10,29,.15)}
 
 /* Section nav */
-.section-nav{background:var(--nav-bg);color:var(--nav-fg)}
+.section-nav{background:var(--nav-bg);color:var(--nav-fg); }
 .section-inner{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;min-height:56px}
+.sections-mobile { display: none; }   /* hidden on desktop */
+
 .news-badge{font-weight:700;letter-spacing:.15em;font-size:24px;padding:6px 0;color:#fff}
 .cats{display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:18px}
 .cats a{padding:10px 12px;border-radius:999px;font-weight:700;color:var(--nav-fg);white-space:nowrap}
@@ -64,4 +66,38 @@ h1.title{margin:.25em 0 .35em;font-size:38px;line-height:1.15;letter-spacing:-.0
   .news-badge{font-size:18px}
   h1.title{font-size:30px}
   .hero{width:100%;max-width:none;margin:12px 0}
+
+  .section-inner { grid-template-columns: 1fr auto; }
+  .cats { display: none; }                     /* hide horizontal categories */
+
+  .sections-mobile { display: block; justify-self: end; position: relative; }
+  .sections-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 12px;
+    border: 2px solid #fff; border-radius: 6px;
+    background: transparent; color: #fff; font-weight: 700;
+  }
+
+  .sections-menu {
+    position: absolute; top: calc(100% + 6px); right: 0;
+    width: min(88vw, 360px); max-height: 60vh; overflow: auto;
+    background: #fff; color: #111; border: 1px solid #e5e7eb;
+    border-radius: 8px; box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    padding: 6px 0; display: none; z-index: 10;
+  }
+  .sections-mobile.open .sections-menu { display: block; }
+
+  .sections-menu li a {
+    display: block; padding: 12px 14px; font-weight: 600;
+  }
+  .sections-menu li + li a { border-top: 1px solid #f1f5f9; }
+
+  .topbar-right .icon-btn { gap: 0; } /* remove icon→text spacing */
+  .topbar-right .icon-btn span{
+    /* visually hidden but readable by screen readers */
+    position: absolute !important;
+    width: 1px; height: 1px; padding: 0; margin: 0;
+    overflow: hidden; white-space: nowrap; border: 0;
+    clip: rect(0 0 0 0); clip-path: inset(50%);
+  }
 }

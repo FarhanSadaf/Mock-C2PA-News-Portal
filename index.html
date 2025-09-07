@@ -40,7 +40,9 @@
     <nav class="section-nav">
       <div class="container section-inner">
         <div class="news-badge">NEWS</div>
-        <div class="cats">
+        
+        <!-- desktop cats -->
+        <div class="cats" aria-label="Sections">
           <a href="#">Top Stories</a>
           <a href="#">Local</a>
           <a href="#">Climate</a>
@@ -48,6 +50,27 @@
           <a href="#">Politics</a>
           <a href="#">Business</a>
           <a href="#" class="more">More <span aria-hidden="true">▾</span></a>
+        </div>
+
+        <!-- mobile-only dropdown -->
+        <div class="sections-mobile">
+          <button class="sections-toggle" id="sectionsToggle" aria-haspopup="true" aria-expanded="false">
+            Sections <span aria-hidden="true">▾</span>
+          </button>
+          <ul class="sections-menu" id="sectionsMenu" role="menu">
+            <li><a role="menuitem" href="#">Top Stories</a></li>
+            <li><a role="menuitem" href="#">Local</a></li>
+            <li><a role="menuitem" href="#">Climate</a></li>
+            <li><a role="menuitem" href="#">World</a></li>
+            <li><a role="menuitem" href="#">Canada</a></li>
+            <li><a role="menuitem" href="#">Politics</a></li>
+            <li><a role="menuitem" href="#">Indigenous</a></li>
+            <li><a role="menuitem" href="#">Business</a></li>
+            <li><a role="menuitem" href="#">The National</a></li>
+            <li><a role="menuitem" href="#">Health</a></li>
+            <li><a role="menuitem" href="#">Entertainment</a></li>
+            <li><a role="menuitem" href="#">Science</a></li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -91,6 +114,7 @@
   </main>
   
   <script src="assets/js/populate-contents.js" defer></script>
+  <script src="assets/js/section.js" defer></script>
   <script src="assets/js/cr-popup.js" defer></script>
   <script type="module" src="assets/js/c2pa-viewer.js" defer></script>
 </body>

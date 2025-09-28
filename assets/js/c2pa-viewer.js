@@ -123,14 +123,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return dedupe(out);
   };
 
-  // Pull commonly requested fields from a manifest into a flat object
+  // Pull fields from a manifest into a flat object
   const summarizeManifest = (m = {}, fallbackFile = '') => {
-    const issuer =
-      m?.signatureInfo?.issuer ||
-      m?.signatureInfo?.issuerName ||
-      m?.signerInfo?.name ||
-      m?.signer?.name ||
-      '—';
+    // Console log manifest for debugging:
+    // console.log('Manifest:', m);
+
+    const authorObj = m?.assertions?.data[1]?.data?.author[0];
+    const authorName = authorObj?.name || 'Unknown';
+    const authorType = authorObj?.['@type'] || 'Unknown';
+    const author = `${authorName} (${authorType})`;
+
+    // const issuer =
+    //   m?.signatureInfo?.issuer ||
+    //   m?.signatureInfo?.issuerName ||
+    //   m?.signerInfo?.name ||
+    //   m?.signer?.name ||
+    //   '—';
 
     const generator =
       m?.claimGenerator || m?.generator || '—';
@@ -149,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fileNameFromUrl(fallbackFile) ||
       'Image';
 
-    return { issuer, generator, actions, issued: issued ? niceDate(issued) : '—', title };
+    // return { issuer, generator, actions, issued: issued ? niceDate(issued) : '—', title };
+    return { author, generator, actions, issued: issued ? niceDate(issued) : '—', title };
   };
 
   // Render one “row”: image (left) + metadata card (right)
@@ -161,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightCard = emptyNote
       ? `<div class="cr-card cr-card--muted">${escapeHtml(emptyNote)}</div>`
       : `<div class="cr-card">
-           <div><strong>Issued by:</strong> ${escapeHtml(meta.issuer)}</div>
+           <div><strong>Author:</strong> ${escapeHtml(meta.author)}</div>
            <div><strong>App/device used:</strong> ${escapeHtml(meta.generator)}</div>
            ${acts}
            <div><strong>Issued on:</strong> ${escapeHtml(meta.issued)}</div>
@@ -214,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let html = '';
 
       if (!active) {
-        const meta = { issuer: '—', generator: '—', actions: [], issued: '—', title: fileNameFromUrl(assetUrl) || 'Image' };
+        // const meta = { issuer: '—', generator: '—', actions: [], issued: '—', title: fileNameFromUrl(assetUrl) || 'Image' };
+        const meta = { author: '—', generator: '—', actions: [], issued: '—', title: fileNameFromUrl(assetUrl) || 'Image' };
         html += renderRow(currThumb, meta, 'No Content Credentials');
       } else {
         const meta = summarizeManifest(active, assetUrl);
@@ -235,7 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
           sm.title = pTitle;
           html += renderRow(pThumb || currThumb, sm);
         } else {
-          const sm = { issuer: '—', generator: '—', actions: [], issued: '—', title: pTitle };
+          // const sm = { issuer: '—', generator: '—', actions: [], issued: '—', title: pTitle };
+          const sm = { author: '—', generator: '—', actions: [], issued: '—', title: pTitle };
           html += renderRow(pThumb || currThumb, sm, 'No Content Credential');
         }
       }

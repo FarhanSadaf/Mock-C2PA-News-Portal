@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const ACTION_TITLES = {
   'c2pa.opened': 'Opened a pre-existing file',
 
-  'c2pa.cropped': 'Cropping edits',
+  'c2pa.cropped': 'Cropping',
   'c2pa.actions.resize': 'Resizing',
   'c2pa.actions.rotate': 'Rotate',
   'c2pa.actions.color_adjust': 'Color adjustments',

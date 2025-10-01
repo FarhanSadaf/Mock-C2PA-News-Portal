@@ -1,5 +1,22 @@
 [
   {
+    "article_id": "0",
+    "kicker": "World",
+    "title": "Claudia Sheinbaum wins landslide to become Mexico's 1st woman president",
+    "autor": "Thomson Reuters",
+    "posted": "Jun 02, 2024 4:28 PM CST",
+    "last_updated": "Jul 16, 2024",
+    "image_path": "images/cbc-mexico-voters.jpg",
+    "image_caption": "Voters cast their ballots during general elections in Mexico City on Sunday.",
+    "content": [
+      "Claudia Sheinbaum will become Mexico's first female president, inheriting the project of her mentor and outgoing leader Andres Manuel Lopez Obrador whose popularity among the poor helped drive her triumph.",
+      "Sheinbaum, a climate scientist and former mayor of Mexico City, won the presidency with between 58.3 per cent and 60.7 per cent of the vote, according to a rapid sample count by Mexico's electoral authority. That is set to be the highest vote percentage in Mexico's democratic history.",
+      "Sheinbaum is the first woman to win a general election in the United States, Mexico or Canada.",
+      "The ruling coalition was also on track for a possible two-thirds super majority in both houses of Congress, which would allow the coalition to pass constitutional reforms without opposition support, according to the range of results given by the electoral authority.",
+      "On her way to vote on Sunday morning, Sheinbaum told journalists it was a \"historic day\" and that she felt at ease and content. Her victory represents a major step for Mexico, a country known for its macho culture, with her six-year term beginning Oct. 1 once results are finalized."
+    ]
+  },
+  {
     "article_id": "1",
     "kicker": "World",
     "title": "Community gathers in Riverton to honor longtime volunteer at Saturday memorial",
@@ -17,18 +34,46 @@
   {
     "article_id": "2",
     "kicker": "World",
-    "title": "Claudia Sheinbaum wins landslide to become Mexico's 1st woman president",
+    "title": "Community gathers in Riverton to honor longtime volunteer at Saturday memorial",
     "autor": "Thomson Reuters",
     "posted": "Jun 02, 2024 4:28 PM CST",
     "last_updated": "Jul 16, 2024",
-    "image_path": "images/cbc-mexico-voters.jpg",
-    "image_caption": "Voters cast their ballots during general elections in Mexico City on Sunday.",
+    "image_path": "images/preserving_cropping_ai_unrecognized.jpg",
+    "image_caption": "Two attendees console each other during the memorial service in Riverton’s Greenlake Park, Saturday afternoon.",
     "content": [
-      "Claudia Sheinbaum will become Mexico's first female president, inheriting the project of her mentor and outgoing leader Andres Manuel Lopez Obrador whose popularity among the poor helped drive her triumph.",
-      "Sheinbaum, a climate scientist and former mayor of Mexico City, won the presidency with between 58.3 per cent and 60.7 per cent of the vote, according to a rapid sample count by Mexico's electoral authority. That is set to be the highest vote percentage in Mexico's democratic history.",
-      "Sheinbaum is the first woman to win a general election in the United States, Mexico or Canada.",
-      "The ruling coalition was also on track for a possible two-thirds super majority in both houses of Congress, which would allow the coalition to pass constitutional reforms without opposition support, according to the range of results given by the electoral authority.",
-      "On her way to vote on Sunday morning, Sheinbaum told journalists it was a \"historic day\" and that she felt at ease and content. Her victory represents a major step for Mexico, a country known for its macho culture, with her six-year term beginning Oct. 1 once results are finalized."
+      "On Saturday, more than a hundred residents gathered at Greenlake Park in Riverton for a memorial honouring a longtime neighborhood volunteer who died earlier this month.",
+      "Friends and family shared brief remarks about her work organizing food drives and mentoring teens; the service concluded with a quiet walk past a small floral tribute near the park’s south entrance.",
+      "Organizers from the Oak Street Community Center said the event was intended “simply to give neighbors a place to grieve together.” Attendees observed a moment of silence, and volunteers collected donations for the center’s youth programs. City officials said a plaque will be installed next month to recognize her service."
+    ]
+  },
+  {
+    "article_id": "3",
+    "kicker": "World",
+    "title": "Community gathers in Riverton to honor longtime volunteer at Saturday memorial",
+    "autor": "Thomson Reuters",
+    "posted": "Jun 02, 2024 4:28 PM CST",
+    "last_updated": "Jul 16, 2024",
+    "image_path": "images/preserving_cropping_non-ai_recognized.jpg",
+    "image_caption": "Two attendees console each other during the memorial service in Riverton’s Greenlake Park, Saturday afternoon.",
+    "content": [
+      "On Saturday, more than a hundred residents gathered at Greenlake Park in Riverton for a memorial honouring a longtime neighborhood volunteer who died earlier this month.",
+      "Friends and family shared brief remarks about her work organizing food drives and mentoring teens; the service concluded with a quiet walk past a small floral tribute near the park’s south entrance.",
+      "Organizers from the Oak Street Community Center said the event was intended “simply to give neighbors a place to grieve together.” Attendees observed a moment of silence, and volunteers collected donations for the center’s youth programs. City officials said a plaque will be installed next month to recognize her service."
+    ]
+  },
+  {
+    "article_id": "4",
+    "kicker": "World",
+    "title": "Community gathers in Riverton to honor longtime volunteer at Saturday memorial",
+    "autor": "Thomson Reuters",
+    "posted": "Jun 02, 2024 4:28 PM CST",
+    "last_updated": "Jul 16, 2024",
+    "image_path": "images/preserving_cropping_non-ai_unrecognized.jpg",
+    "image_caption": "Two attendees console each other during the memorial service in Riverton’s Greenlake Park, Saturday afternoon.",
+    "content": [
+      "On Saturday, more than a hundred residents gathered at Greenlake Park in Riverton for a memorial honouring a longtime neighborhood volunteer who died earlier this month.",
+      "Friends and family shared brief remarks about her work organizing food drives and mentoring teens; the service concluded with a quiet walk past a small floral tribute near the park’s south entrance.",
+      "Organizers from the Oak Street Community Center said the event was intended “simply to give neighbors a place to grieve together.” Attendees observed a moment of silence, and volunteers collected donations for the center’s youth programs. City officials said a plaque will be installed next month to recognize her service."
     ]
   }
 ]

@@ -74,54 +74,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // pretty names for common action codes
-  const ACTION_TITLES = {
-    crop: 'Cropping edits',
-    cropping: 'Cropping edits',
-    'c2pa.actions.crop': 'Cropping edits',
-    resize: 'Resizing',
-    'c2pa.actions.resize': 'Resizing',
-    rotate: 'Rotate',
-    'c2pa.actions.rotate': 'Rotate',
-    coloradjust: 'Color adjustments',
-    'color-adjust': 'Color adjustments',
-    'c2pa.actions.color_adjust': 'Color adjustments',
-    'contentauth.actions.opened': 'Opened a pre-existing file',
-    opened: 'Opened a pre-existing file',
-    edit: 'Edited',
-    edited: 'Edited'
-  };
-  const actionPretty = (code) => ACTION_TITLES[lower(code)] || code;
+ // Pretty names (includes c2pa.cropped)
+const ACTION_TITLES = {
+  'c2pa.opened': 'Opened a pre-existing file',
 
-  // Safe action extractor (handles many shapes, never .toLowerCase on undefined)
-  const extractActions = (manifest) => {
-    const out = [];
+  'c2pa.cropped': 'Cropping edits',
+  'c2pa.actions.resize': 'Resizing',
+  'c2pa.actions.rotate': 'Rotate',
+  'c2pa.actions.color_adjust': 'Color adjustments',
 
-    for (const a of toList(manifest?.assertions)) {
-      const label = lower(a?.label ?? a?.type ?? '');
-      const data  = a?.data ?? a?.value ?? a;
+  'c2pa.published': 'Published'
+};
 
-      let list = [];
-      if (/actions?/.test(label)) {
-        if (Array.isArray(data?.actions)) list = data.actions;
-        else if (Array.isArray(data)) list = data;
-        else if (data && typeof data === 'object' && Array.isArray(data.action)) list = data.action;
-      }
+function extractActions(manifest) {
+  const out = [];
 
-      for (const it of list) {
-        let code = typeof it === 'string' ? it : (it?.action ?? it?.type ?? '');
-        code = lower(code);
-        if (!code) continue;
-        out.push(actionPretty(code));
-      }
+  const assertionsRaw = manifest?.assertions;
+  const assertions = Array.isArray(assertionsRaw)
+    ? assertionsRaw
+    : (Array.isArray(assertionsRaw?.data) ? assertionsRaw.data : []);
 
-      // heuristic catch-all for cropping
-      const s = lower(JSON.stringify(data ?? {}));
-      if (!out.some(t => /crop/i.test(t)) && /cropp?/.test(s)) out.push('Cropping edits');
+  for (const a of assertions) {
+    const label = String(a?.label || a?.type || '').toLowerCase();
+    if (!label.startsWith('c2pa.actions')) continue;
+
+    const actions = Array.isArray(a?.data?.actions) ? a.data.actions : [];
+    for (const it of actions) {
+      console.log('Action item:', it);
+      const code = String(typeof it === 'string' ? it : (it?.action || it?.type || '')).toLowerCase();
+      if (!code) continue;
+
+      const base = ACTION_TITLES[code];
+      if (!base) continue; // only include if mapped in ACTION_TITLES
+
+      const dst = String(it?.digitalSourceType || '').toLowerCase();
+      const suffix = dst.includes('trainedalgorithmicmedia')
+        ? (dst.includes('composite') ? ' (AI-edited)' : ' (AI-generated)')
+        : '';
+
+      out.push(base + suffix);
     }
+  }
 
-    return dedupe(out);
-  };
+  // unique, preserve order
+  return [...new Set(out)];
+}
+
+
 
   // Pull fields from a manifest into a flat object
   const summarizeManifest = (m = {}, fallbackFile = '') => {
@@ -141,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //   '—';
 
     const generator =
-      m?.claimGenerator || m?.generator || '—';
+      m?.claimGeneratorInfo[0]?.name + ' ' + m?.claimGeneratorInfo[0]?.version || '—';
 
     const issued =
       m?.signatureInfo?.time ||

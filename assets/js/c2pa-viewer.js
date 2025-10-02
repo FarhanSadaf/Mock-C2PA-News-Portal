@@ -88,7 +88,9 @@ const ACTION_PARAMS = {
   Texture: 'texture', 
   Vibrance: 'vibrance', 
   Saturation: 'saturation', 
-  PostCropVignetteAmount: 'vignette' 
+  PostCropVignetteAmount: 'vignette',
+  Sharpness: 'sharpness',
+  SharpenDetail: 'sharpness'
 };
 
 function extractActions(manifest) {

@@ -79,9 +79,7 @@ const ACTION_TITLES = {
   'c2pa.opened': 'Opened a pre-existing file',
 
   'c2pa.cropped': 'Cropping',
-  'c2pa.actions.resize': 'Resizing',
-  'c2pa.actions.rotate': 'Rotate',
-  'c2pa.actions.color_adjust': 'Color adjustments',
+  'c2pa.color_adjustments': 'Color adjustments',
 
   'c2pa.published': 'Published'
 };

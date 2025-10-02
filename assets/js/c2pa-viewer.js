@@ -79,10 +79,10 @@ const ACTION_TITLES = {
   'c2pa.opened': 'Opened a pre-existing file',
   'c2pa.cropped': 'Cropping',
   'c2pa.color_adjustments': 'Color adjustments',
+  'c2pa.blur': 'Blurring',
   'c2pa.published': 'Published'
 };
 
-// Add/extend as you like, e.g. Exposure2012 -> 'exposure'
 const ACTION_PARAMS = { 
   Exposure2012: 'exposure', 
   Texture: 'texture', 
@@ -94,6 +94,7 @@ const ACTION_PARAMS = {
   ConvertToGrayscale: 'grayscale conversion',
   NoiseReduction: 'noise reduction',
   ColorNoiseReduction: 'noise reduction',
+  BackgroundBlur: 'background blur'
 };
 
 function extractActions(manifest) {
@@ -157,20 +158,12 @@ function extractActions(manifest) {
 
   // Pull fields from a manifest into a flat object
   const summarizeManifest = (m = {}, fallbackFile = '') => {
-    // Console log manifest for debugging:
     // console.log('Manifest:', m);
 
     const authorObj = m?.assertions?.data[1]?.data?.author[0];
     const authorName = authorObj?.name || 'Unknown';
     const authorType = authorObj?.['@type'] || 'Unknown';
     const author = `${authorName} (${authorType})`;
-
-    // const issuer =
-    //   m?.signatureInfo?.issuer ||
-    //   m?.signatureInfo?.issuerName ||
-    //   m?.signerInfo?.name ||
-    //   m?.signer?.name ||
-    //   '—';
 
     const generator =
       m?.claimGeneratorInfo[0]?.name + ' ' + m?.claimGeneratorInfo[0]?.version || '—';
@@ -254,7 +247,6 @@ function extractActions(manifest) {
       let html = '';
 
       if (!active) {
-        // const meta = { issuer: '—', generator: '—', actions: [], issued: '—', title: fileNameFromUrl(assetUrl) || 'Image' };
         const meta = { author: '—', generator: '—', actions: [], issued: '—', title: fileNameFromUrl(assetUrl) || 'Image' };
         html += renderRow(currThumb, meta, 'No Content Credentials');
       } else {
@@ -276,7 +268,6 @@ function extractActions(manifest) {
           sm.title = pTitle;
           html += renderRow(pThumb || currThumb, sm);
         } else {
-          // const sm = { issuer: '—', generator: '—', actions: [], issued: '—', title: pTitle };
           const sm = { author: '—', generator: '—', actions: [], issued: '—', title: pTitle };
           html += renderRow(pThumb || currThumb, sm, 'No Content Credential');
         }

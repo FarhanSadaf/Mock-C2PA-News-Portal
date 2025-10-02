@@ -167,7 +167,9 @@ function extractActions(manifest) {
     const author = `${authorName} (${authorType})`;
 
     const generator =
-      m?.claimGeneratorInfo[0]?.name + ' ' + m?.claimGeneratorInfo[0]?.version || '—';
+      (m?.claimGeneratorInfo?.[0]?.name || '') +
+      (m?.claimGeneratorInfo?.[0]?.version ? ' ' + m.claimGeneratorInfo[0].version : '') ||
+      '—';
 
     const issued =
       m?.signatureInfo?.time ||

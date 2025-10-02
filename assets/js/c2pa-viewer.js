@@ -92,6 +92,8 @@ const ACTION_PARAMS = {
   Sharpness: 'sharpness',
   SharpenDetail: 'sharpness',
   ConvertToGrayscale: 'grayscale conversion',
+  NoiseReduction: 'noise reduction',
+  ColorNoiseReduction: 'noise reduction',
 };
 
 function extractActions(manifest) {

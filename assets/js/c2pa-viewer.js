@@ -74,23 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
- // Pretty names (includes c2pa.cropped)
+// Pretty titles you already use
 const ACTION_TITLES = {
   'c2pa.opened': 'Opened a pre-existing file',
-
   'c2pa.cropped': 'Cropping',
   'c2pa.color_adjustments': 'Color adjustments',
-
   'c2pa.published': 'Published'
 };
 
-function extractActions(manifest) {
-  const out = [];
+// Add/extend as you like, e.g. Exposure2012 -> 'exposure'
+const ACTION_PARAMS = { 
+  Exposure2012: 'exposure', 
+  Texture: 'texture', 
+  Vibrance: 'vibrance', 
+  Saturation: 'saturation', 
+  PostCropVignetteAmount: 'vignette' 
+};
 
+function extractActions(manifest) {
   const assertionsRaw = manifest?.assertions;
   const assertions = Array.isArray(assertionsRaw)
     ? assertionsRaw
     : (Array.isArray(assertionsRaw?.data) ? assertionsRaw.data : []);
+
+  const groups = new Map(); 
+  let order = 0;
 
   for (const a of assertions) {
     const label = String(a?.label || a?.type || '').toLowerCase();
@@ -98,24 +106,46 @@ function extractActions(manifest) {
 
     const actions = Array.isArray(a?.data?.actions) ? a.data.actions : [];
     for (const it of actions) {
-      console.log('Action item:', it);
-      const code = String(typeof it === 'string' ? it : (it?.action || it?.type || '')).toLowerCase();
-      if (!code) continue;
+      const rawCode = typeof it === 'string' ? it : (it?.action || it?.type || '');
+      const code = String(rawCode).toLowerCase();
+      if (!code || !ACTION_TITLES[code]) continue; // only mapped actions
 
-      const base = ACTION_TITLES[code];
-      if (!base) continue; // only include if mapped in ACTION_TITLES
+      // create group if first time seen
+      if (!groups.has(code)) {
+        groups.set(code, {
+          idx: order++,
+          title: ACTION_TITLES[code],
+          params: new Set(),
+          ai: '' // '', ' [AI-edited]', ' [AI-generated]'
+        });
+      }
 
+      const g = groups.get(code);
+
+      // collect parameter token (from com.adobe.acr) if mapped
+      const paramKey = it?.parameters?.['com.adobe.acr'];
+      const mapped = paramKey ? ACTION_PARAMS[paramKey] : null;
+      if (mapped) g.params.add(mapped);
+
+      // track AI suffix for the group
       const dst = String(it?.digitalSourceType || '').toLowerCase();
-      const suffix = dst.includes('trainedalgorithmicmedia')
-        ? (dst.includes('composite') ? ' (AI-edited)' : ' (AI-generated)')
-        : '';
-
-      out.push(base + suffix);
+      if (dst.includes('trainedalgorithmicmedia')) {
+        const suffix = dst.includes('composite') ? ' [AI-edited]' : ' [AI-generated]';
+        // prefer edited over generated if both ever appear
+        g.ai = g.ai === ' [AI-edited]' ? g.ai : suffix;
+      }
     }
   }
 
-  // unique, preserve order
-  return [...new Set(out)];
+  // Build final ordered list
+  const out = [...groups.values()]
+    .sort((a, b) => a.idx - b.idx)
+    .map(g => {
+      const details = g.params.size ? ` like ${[...g.params].join(', ')}` : '';
+      return g.title + details + g.ai;
+    });
+
+  return out;
 }
 
 
@@ -154,14 +184,13 @@ function extractActions(manifest) {
       fileNameFromUrl(fallbackFile) ||
       'Image';
 
-    // return { issuer, generator, actions, issued: issued ? niceDate(issued) : '—', title };
     return { author, generator, actions, issued: issued ? niceDate(issued) : '—', title };
   };
 
   // Render one “row”: image (left) + metadata card (right)
   const renderRow = (thumbUrl, meta, emptyNote = '') => {
     const acts = (meta.actions && meta.actions.length)
-      ? `<div><strong>Actions:</strong> ${escapeHtml(meta.actions.join(', '))}</div>`
+      ? `<div><strong>Actions:</strong> ${escapeHtml(meta.actions.join(' -> '))}</div>`
       : '';
 
     const rightCard = emptyNote

@@ -90,7 +90,8 @@ const ACTION_PARAMS = {
   Saturation: 'saturation', 
   PostCropVignetteAmount: 'vignette',
   Sharpness: 'sharpness',
-  SharpenDetail: 'sharpness'
+  SharpenDetail: 'sharpness',
+  ConvertToGrayscale: 'grayscale conversion',
 };
 
 function extractActions(manifest) {

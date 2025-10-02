@@ -94,7 +94,8 @@ const ACTION_PARAMS = {
   ConvertToGrayscale: 'grayscale conversion',
   NoiseReduction: 'noise reduction',
   ColorNoiseReduction: 'noise reduction',
-  BackgroundBlur: 'background blur'
+  BackgroundBlur: 'background blur',
+  RedEyeRemoval: 'red-eye removal'
 };
 
 function extractActions(manifest) {

@@ -82,6 +82,7 @@ const ACTION_TITLES = {
   'c2pa.blur': 'Blurring',
   'c2pa.edited': 'Edits',
   'c2pa.created': 'Created',
+  'c2pa.inpainting': 'Inpainting',
   'c2pa.published': 'Published'
 };
 
@@ -99,6 +100,7 @@ const ACTION_PARAMS = {
   BackgroundBlur: 'background blur',
   RedEyeRemoval: 'red-eye removal',
   ManualCompositing: 'manual compositing',
+  'Clone/Heal': 'cloning/healing',
 };
 
 function extractActions(manifest) {

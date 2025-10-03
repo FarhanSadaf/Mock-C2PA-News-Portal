@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const escapeHtml = (s = '') =>
     String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 
-  const lower = (v) => (v == null ? '' : String(v).toLowerCase());
 
   const toList = (v) => {
     if (!v) return [];
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return [];
   };
 
-  const dedupe = (arr) => [...new Set(arr.filter(Boolean))];
 
   const getThumbUrl = (obj, fallback = '') => {
     try {
@@ -185,7 +183,7 @@ function extractActions(manifest) {
 
     const issued =
       m?.signatureInfo?.time ||
-      m?.captureDate ||
+      m?.assertions?.data[0]?.data?.["EXIF:DateTime"] ||
       m?.created ||
       '—';
 
@@ -275,13 +273,32 @@ function extractActions(manifest) {
         html += connector();
 
         const pThumb = getThumbUrl(ing, '');
-        const pTitle = ing?.title || ing?.documentId || 'Source';
-        // if the ingredient carries its own manifest summary (often it does not), try to show it
-        const hasManifest = !!ing?.ingredientManifest;
+        const pTitle = ing?.manifest?.title || ing?.title || 'Source';
+        console.log(pTitle)
+        
+        const hasManifest = !!ing?.manifest;
         if (hasManifest) {
-          const sm = summarizeManifest(ing.ingredientManifest, pTitle);
+          const sm = summarizeManifest(ing.manifest, pTitle);
           sm.title = pTitle;
           html += renderRow(pThumb || currThumb, sm);
+
+          // If it ing.manifest has ingredients, show just one more level (grandparents)
+          const gpas = toList(ing?.manifest?.ingredients);
+          for (const gpa of gpas) {
+            html += connector();
+            const gpThumb = getThumbUrl(gpa, '');
+            const gpTitle = gpa?.manifest?.title || gpa?.title || 'Source';
+            if (gpas.length) {
+            if (gpas.length > 1) {
+              const sm = { author: '—', generator: '—', actions: [], issued: '—', title: gpTitle };
+              html += renderRow(gpThumb || pThumb || currThumb, sm, `+ ${gpas.length - 1} more source(s)`);
+            } else {
+              const sm = summarizeManifest(gpas[0]?.manifest, gpTitle);
+              sm.title = gpTitle;
+              html += renderRow(gpThumb || pThumb || currThumb, sm);
+            }
+          }
+          }
         } else {
           const sm = { author: '—', generator: '—', actions: [], issued: '—', title: pTitle };
           html += renderRow(pThumb || currThumb, sm, 'No Content Credential');

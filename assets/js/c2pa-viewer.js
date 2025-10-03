@@ -101,6 +101,7 @@ const ACTION_PARAMS = {
   RedEyeRemoval: 'red-eye removal',
   ManualCompositing: 'manual compositing',
   'Clone/Heal': 'cloning/healing',
+  Transform: 'transformation e.g. wrap, distort',
 };
 
 function extractActions(manifest) {

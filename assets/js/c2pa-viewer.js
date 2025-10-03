@@ -80,6 +80,8 @@ const ACTION_TITLES = {
   'c2pa.cropped': 'Cropping',
   'c2pa.color_adjustments': 'Color adjustments',
   'c2pa.blur': 'Blurring',
+  'c2pa.edited': 'Edits',
+  'c2pa.created': 'Created',
   'c2pa.published': 'Published'
 };
 
@@ -95,7 +97,8 @@ const ACTION_PARAMS = {
   NoiseReduction: 'noise reduction',
   ColorNoiseReduction: 'noise reduction',
   BackgroundBlur: 'background blur',
-  RedEyeRemoval: 'red-eye removal'
+  RedEyeRemoval: 'red-eye removal',
+  ManualCompositing: 'manual compositing',
 };
 
 function extractActions(manifest) {
@@ -117,11 +120,17 @@ function extractActions(manifest) {
       const code = String(rawCode).toLowerCase();
       if (!code || !ACTION_TITLES[code]) continue; // only mapped actions
 
+      let title_ = ACTION_TITLES[code];
+      if (code === 'c2pa.created') {
+        const agent = it?.softwareAgent?.name || 'Unknown tool';
+        title_ += ` by ${agent}`;
+      }
+
       // create group if first time seen
       if (!groups.has(code)) {
         groups.set(code, {
           idx: order++,
-          title: ACTION_TITLES[code],
+          title: title_,
           params: new Set(),
           ai: '' // '', ' [AI-edited]', ' [AI-generated]'
         });
